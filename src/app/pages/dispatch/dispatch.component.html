@@ -1,0 +1,318 @@
+<section>
+  <div>
+    <div class="setTargetHeadline">
+      <div>
+        <h2>Set Target</h2>
+        <p>Jul 1 - Jul 7</p>
+      </div>
+      <button>ｘ</button>
+    </div>
+    <div class="targetComponentsDiv">
+      <div>
+        <div>
+          <p>1</p>
+          <app-target></app-target>
+          <button>
+            <img src="../../../assets/images/menu.png" alt="menu" />
+          </button>
+        </div>
+        <div>
+          <p>2</p>
+          <app-target [showBottomRow]="false"></app-target>
+          <button>
+            <img src="../../../assets/images/menu.png" alt="menu" />
+          </button>
+        </div>
+      </div>
+      <button class="addTargetButton">Add Target</button>
+    </div>
+    <button class="confirmButton">Confirm</button>
+  </div>
+  <div>
+    <article>
+      <div class="firstRow">
+        <div>
+          <div class="headlineDiv">
+            <h2>Dispatch</h2>
+            <h4>reward system</h4>
+          </div>
+          <div class="datesDiv">
+            <div *ngFor="let date of dates">
+              <h5>{{ date.hedline }}</h5>
+              <p>{{ date.centralNumber }}</p>
+              <h6>
+                <span>
+                  {{
+                    date.leftValue
+                      | number : "1.2-2"
+                      | currency : "USD" : "symbol"
+                  }} </span
+                ><span>
+                  {{
+                    date.rightValue
+                      | number : "1.2-2"
+                      | currency : "USD" : "symbol"
+                  }}
+                </span>
+              </h6>
+            </div>
+          </div>
+          <div class="optionsDiv">
+            <img src="../../../assets/images/gear.png" alt="gear" />
+          </div>
+        </div>
+        <div>
+          <div class="targetDiv">
+            <h4>Target</h4>
+            <div class="targetDivColumns">
+              <div>
+                <h5>Gross per truck</h5>
+                <p>$6.850</p>
+                <h5>15% sucess rate</h5>
+              </div>
+              <div>
+                <h5>Rate per mile</h5>
+                <p>$2.18</p>
+                <h5>29% sucess rate</h5>
+              </div>
+            </div>
+          </div>
+          <div class="succesBonusDiv">
+            <div>
+              <h4>Success rate</h4>
+              <p>44%</p>
+            </div>
+            <div>
+              <h4>Bonus achieved</h4>
+              <p>56<span>times</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="secoundRow">
+        <button>Drivers</button>
+        <button>Trucks</button>
+      </div>
+      <div class="thirdRow">
+        <input class="commonStyles" type="text" placeholder="Search driver" />
+        <select class="commonStyles">
+          <option>All dispatchers</option>
+        </select>
+        <select class="commonStyles">
+          <option>All positions</option>
+        </select>
+        <select class="commonStyles">
+          <option>All types</option>
+        </select>
+        <div></div>
+      </div>
+      <div class="fourthRow">
+        <p>Sort by</p>
+        <select>
+          <option>Gross - Highest to lowest</option>
+        </select>
+      </div>
+      <div class="fifthRow">
+        <div class="dispatchs" *ngFor="let dispatch of dispatchs">
+          <div>
+            <h4>
+              {{ dispatch.name }} <span>{{ dispatch.lastName }}</span>
+            </h4>
+            <div>
+              <figure>
+                <img
+                  src="../../../assets/images/earphones.png"
+                  alt="{{ dispatch.sddc }}"
+                />
+                <figcaption>{{ dispatch.shortName }}</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="../../../assets/images/transport.png"
+                  alt="{{ dispatch.shortName }}"
+                />
+                <figcaption>{{ dispatch.sddc }}</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div>
+            <div style="position: relative">
+              <h5>Gross</h5>
+              <ng-container *ngIf="dispatch.gross <= 97; else maxGross">
+                <span
+                  style="
+                    position: absolute;
+                    top: -22px;
+                    color: #00318c;
+                    font-size: 12px;
+                    padding: 0px 30px 0px 0px;
+                  "
+                  [ngStyle]="{
+                left: dispatch.gross + '%',
+              }"
+                  >{{ dispatch.gross + "%" }}</span
+                >
+              </ng-container>
+              <ng-template #maxGross>
+                <span
+                  style="
+                    position: absolute;
+                    top: -22px;
+                    color: #00318c;
+                    font-size: 12px;
+                  "
+                  [ngStyle]="{
+              left: 97 + '%',
+            }"
+                  >{{ dispatch.gross + "%" }}</span
+                >
+              </ng-template>
+              <input
+                [ngStyle]="{
+                  background:
+                    'linear-gradient(94deg, #0d5fdf 0%, #00b025 ' +
+                    dispatch.gross +
+                    '%, #ddd ' +
+                    dispatch.gross +
+                    '%)'
+                }"
+                type="range"
+                min="0"
+                max="100"
+                [value]="dispatch.gross"
+              />
+            </div>
+            <h6>{{ dispatch.miles + " " + "miles" }}</h6>
+            <div style="position: relative">
+              <h5 style="text-align: end">RPM</h5>
+              <ng-container *ngIf="dispatch.RPM <= 97; else maxRPM">
+                <span
+                  style="
+                    position: absolute;
+                    top: -22px;
+                    color: #00318c;
+                    font-size: 12px;
+                  "
+                  [ngStyle]="{
+                left: dispatch.RPM + '%',
+              }"
+                  >{{ dispatch.RPM + "%" }}</span
+                >
+              </ng-container>
+              <ng-template #maxRPM>
+                <span
+                  style="
+                    position: absolute;
+                    top: -22px;
+                    color: #00318c;
+                    font-size: 12px;
+                  "
+                  [ngStyle]="{
+              left: 97 + '%',
+            }"
+                  >{{ dispatch.RPM + "%" }}</span
+                >
+              </ng-template>
+              <input
+                [ngStyle]="{
+                  background:
+                    'linear-gradient(94deg, #0d5fdf 0%, #00b025 ' +
+                    dispatch.RPM +
+                    '%, #ddd ' +
+                    dispatch.RPM +
+                    '%)'
+                }"
+                type="range"
+                min="0"
+                max="100"
+                [value]="dispatch.RPM"
+              />
+            </div>
+          </div>
+          <div>
+            <div>
+              <p
+                [ngStyle]="{
+                  'background-image': dispatch.isChecked
+                    ? 'linear-gradient(94deg, #005912 0%, #00b025 97%, #00b025 100%)'
+                    : '',
+                  color: dispatch.isChecked ? '#ffffff' : '',
+                  border: dispatch.isChecked ? 'none' : ''
+                }"
+              >
+                {{
+                  dispatch.topSalary
+                    | number : "1.2-2"
+                    | currency : "USD" : "symbol"
+                }}
+              </p>
+              <p
+                [ngStyle]="{
+                  'background-image': dispatch.isChecked
+                    ? 'linear-gradient(94deg, #005912 0%, #00b025 97%, #00b025 100%)'
+                    : '',
+                  color: dispatch.isChecked ? '#ffffff' : '',
+                  border: dispatch.isChecked ? 'none' : ''
+                }"
+              >
+                {{
+                  dispatch.botSalary
+                    | number : "1.2-2"
+                    | currency : "USD" : "symbol"
+                }}
+              </p>
+            </div>
+            <div>
+              <figure
+                [ngStyle]="{
+                  border: dispatch.isChecked ? '1px solid #00b025' : ''
+                }"
+              >
+                <ng-container *ngIf="dispatch.isChecked"
+                  ><img
+                    width="40dvh"
+                    src="../../../assets/images/ch.png"
+                    alt="check"
+                /></ng-container>
+              </figure>
+              <h6>{{ "+" + dispatch.points + "pts" }}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <aside>
+      <div class="filterRow">
+        <input type="text" />
+        <div>
+          <button>All time</button>
+          <button>This week</button>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Dispatcher</th>
+            <th>Target achieved</th>
+            <th>Earnings</th>
+            <th>Gross pts</th>
+            <th>RPM pts</th>
+            <th>Total pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sbd of sidebarData">
+            <td>{{ sbd.dispatcher }}</td>
+            <td>{{ sbd.targetAchieved }}</td>
+            <td>{{ sbd.earnings }}</td>
+            <td>{{ sbd.grossPts }}</td>
+            <td>{{ sbd.RPMPts }}</td>
+            <td>
+              <p>{{ sbd.totalPts }}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </aside>
+  </div>
+</section>

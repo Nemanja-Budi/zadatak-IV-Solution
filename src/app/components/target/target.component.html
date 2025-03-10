@@ -1,0 +1,90 @@
+<div class="mainTargetDiv">
+  <div
+    [ngStyle]="{
+      height: showBottomRow ? '123px' : 'auto'
+    }"
+  >
+    <div
+      [ngStyle]="{ 'margin-bottom': showBottomRow ? '0.75rem' : 0 }"
+      class="firstRowOfSetTarget"
+    >
+      <div class="firstColumnConditionAndBasedOne">
+        <div>
+          <label>Condition</label>
+          <select>
+            <option>Gross</option>
+          </select>
+        </div>
+        <div>
+          <label>Based one</label>
+          <select>
+            <option>Drivers performance</option>
+          </select>
+        </div>
+      </div>
+      <div class="secoundColumnMetricsAndPeriod">
+        <div>
+          <label>Metrics</label>
+          <select>
+            <option>Top 10%</option>
+          </select>
+        </div>
+        <div>
+          <label>Period</label>
+          <select>
+            <option>Week</option>
+          </select>
+        </div>
+        <div>
+          <label>Metrics based on</label>
+          <select>
+            <option>Jun 24 - Jun 30</option>
+          </select>
+        </div>
+      </div>
+      <div class="thirdColumnTargetAndCalculating">
+        <div>
+          <label>Target</label>
+          <p>$6.380</p>
+        </div>
+        <button *ngIf="!showBottomRow">+</button>
+        <div>
+          <label>Start calculating points after</label>
+          <p>0%</p>
+        </div>
+      </div>
+    </div>
+    <div class="secoundRowOfSetTarget" *ngIf="showBottomRow">
+      <div class="firstColumnSetTarget">
+        <select>
+          <option>Rate per mile</option>
+        </select>
+        <select>
+          <option>Custom value</option>
+        </select>
+      </div>
+      <div class="secoundColumnSetTarget">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="thirdColumnSetTarget">
+        <p>$2.18</p>
+        <button>+</button>
+        <p>50%</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h4>
+      <span>{{ showBottomRow ? 2 : 1 }}</span>
+      {{ showBottomRow ? "combined conditions" : "condition" }}
+    </h4>
+    <div>
+      <h4>Reward</h4>
+      <button [ngStyle]="{ color: !showBottomRow ? '#a4a4a4' : '' }">
+        {{ showBottomRow ? "$50" : "$0" }}
+      </button>
+    </div>
+  </div>
+</div>
